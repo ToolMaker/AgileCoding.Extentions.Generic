@@ -12,7 +12,15 @@ namespace AgileCoding.Extentions.Generics
         {
             if (target == null)
             {
-                throw typeof(IExceptionType).CreateInstanceWithoutLogging<IExceptionType>(errorMessage);
+                var exception = typeof(IExceptionType).CreateInstanceWithoutLogging<IExceptionType>(errorMessage);
+                if (exception != null)
+                {
+                    throw exception;
+                }
+                else
+                {
+                    throw new Exception(errorMessage);
+                }
             }
         }
 
@@ -21,7 +29,15 @@ namespace AgileCoding.Extentions.Generics
         {
             if (target == null || target.Length == 0)
             {
-                throw typeof(IExceptionType).CreateInstanceWithoutLogging<IExceptionType>(errorMessage);
+                var exception = typeof(IExceptionType).CreateInstanceWithoutLogging<IExceptionType>(errorMessage);
+                if (exception != null)
+                {
+                    throw exception;
+                }
+                else
+                {
+                    throw new Exception(errorMessage);
+                }
             }
         }
 
@@ -30,7 +46,15 @@ namespace AgileCoding.Extentions.Generics
         {
             if (target == null || target.Count == 0)
             {
-                throw typeof(IExceptionType).CreateInstanceWithoutLogging<IExceptionType>(errorMessage);
+                var exception = typeof(IExceptionType).CreateInstanceWithoutLogging<IExceptionType>(errorMessage);
+                if (exception != null)
+                {
+                    throw exception;
+                }
+                else
+                {
+                    throw new Exception(errorMessage);
+                }
             }
         }
 
@@ -67,7 +91,15 @@ namespace AgileCoding.Extentions.Generics
         {
             if (self)
             {
-                throw typeof(bool).CreateInstanceWithoutLogging<TException>(errorMessage);
+                var exception = typeof(bool).CreateInstanceWithoutLogging<TException>(errorMessage);
+                if (exception != null)
+                {
+                    throw exception;
+                }
+                else
+                {
+                    throw new Exception(errorMessage);
+                }
             }
 
             return self;
@@ -78,7 +110,15 @@ namespace AgileCoding.Extentions.Generics
         {
             if (self == null)
             {
-                self = typeof(IGenericType).CreateInstanceWithoutLogging<IGenericType>(constructorParams);
+                IGenericType? genericType = typeof(IGenericType).CreateInstanceWithoutLogging<IGenericType>(constructorParams);
+                if (genericType != null)
+                {
+                    self = genericType;
+                }
+                else
+                { 
+                    throw new Exception("Failed to create instance of type " + typeof(IGenericType).FullName);
+                }
             }
 
             return self;
